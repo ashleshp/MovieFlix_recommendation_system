@@ -1,0 +1,49 @@
+Feedback Service is running...
+a@b.com {'13995': 'like', '106355': 'like', '197467': 'like'}
+fetching user
+{"status": "success", "user": {"user_id": 1, "email": "a@b.com", "password": "$2b$12$dNffSezZdwkBgAVLCP7fNuSG8QCcjQJ.An9aPQ8agfu8.voT8TkVa", "age": 25, "country": "India", "preferred_genres": ["Animation", "Adventure", "Comedy", "Family", "Fantasy"], "liked_movies": [], "disliked_movies": [], "profile_vector": null}}
+got user
+Parsed movie details 
+ liked : ['Captain America', 'Captain America', 'Captain America']
+ disliked: []
+profile updated
+a@b.com {'13995': 'like', '197467': 'like'}
+fetching user
+{"status": "success", "user": {"user_id": 1, "email": "a@b.com", "password": "$2b$12$dNffSezZdwkBgAVLCP7fNuSG8QCcjQJ.An9aPQ8agfu8.voT8TkVa", "age": 25, "country": "India", "preferred_genres": ["Animation", "Adventure", "Comedy", "Family", "Fantasy"], "liked_movies": ["Captain America", "Captain America", "Captain America"], "disliked_movies": [], "profile_vector": null}}
+got user
+Parsed movie details 
+ liked : ['Captain America', 'Captain America']
+ disliked: []
+profile updated
+a@b.com {'14613': 'like', '31240': 'dislike', '68064': 'dislike'}
+fetching user
+{"status": "success", "user": {"user_id": 1, "email": "a@b.com", "password": "$2b$12$dNffSezZdwkBgAVLCP7fNuSG8QCcjQJ.An9aPQ8agfu8.voT8TkVa", "age": 25, "country": "India", "preferred_genres": ["Animation", "Adventure", "Comedy", "Family", "Fantasy"], "liked_movies": ["Captain America", "Captain America", "Captain America", "Captain America", "Captain America"], "disliked_movies": [], "profile_vector": null}}
+got user
+Parsed movie details 
+ liked : ['Next Avengers: Heroes of Tomorrow']
+ disliked: ['Agent for H.A.R.M.', 'Flash Gordon Conquers the Universe']
+profile updated
+a@b.com {'13995': 'like', '106355': 'like', '197467': 'like'}
+fetching user
+{"status": "success", "user": {"user_id": 1, "email": "a@b.com", "password": "$2b$12$dNffSezZdwkBgAVLCP7fNuSG8QCcjQJ.An9aPQ8agfu8.voT8TkVa", "age": 25, "country": "India", "preferred_genres": ["Animation", "Adventure", "Comedy", "Family", "Fantasy"], "liked_movies": ["Captain America", "Captain America", "Captain America", "Captain America", "Captain America", "Next Avengers: Heroes of Tomorrow"], "disliked_movies": ["Agent for H.A.R.M.", "Flash Gordon Conquers the Universe"], "profile_vector": null}}
+got user
+Parsed movie details 
+ liked : ['Captain America', 'Captain America', 'Captain America']
+ disliked: []
+profile updated
+a@b.com {'32638': 'dislike', '35780': 'dislike', '38060': 'dislike', '43580': 'dislike', '366143': 'dislike'}
+fetching user
+{"status": "success", "user": {"user_id": 1, "email": "a@b.com", "password": "$2b$12$dNffSezZdwkBgAVLCP7fNuSG8QCcjQJ.An9aPQ8agfu8.voT8TkVa", "age": 25, "country": "India", "preferred_genres": ["Animation", "Adventure", "Comedy", "Family", "Fantasy"], "liked_movies": ["Captain America", "Captain America", "Captain America", "Captain America", "Captain America", "Next Avengers: Heroes of Tomorrow", "Captain America", "Captain America", "Captain America"], "disliked_movies": ["Agent for H.A.R.M.", "Flash Gordon Conquers the Universe"], "profile_vector": null}}
+got user
+Parsed movie details 
+ liked : []
+ disliked: ['Cartoon All-Stars to the Rescue', 'Thunderbirds are GO', 'The Lorax', 'The Cat in the Hat', 'Binky Nelson Unpacified']
+profile updated
+a@b.com {'953': 'dislike', '24266': 'dislike', '33371': 'dislike', '38060': 'dislike', '105945': 'like'}
+fetching user
+{"status": "success", "user": {"user_id": 1, "email": "a@b.com", "password": "$2b$12$dNffSezZdwkBgAVLCP7fNuSG8QCcjQJ.An9aPQ8agfu8.voT8TkVa", "age": 25, "country": "India", "preferred_genres": ["Animation", "Adventure", "Comedy", "Family", "Fantasy"], "liked_movies": ["Captain America", "Captain America", "Captain America", "Captain America", "Captain America", "Next Avengers: Heroes of Tomorrow", "Captain America", "Captain America", "Captain America"], "disliked_movies": ["Agent for H.A.R.M.", "Flash Gordon Conquers the Universe", "Cartoon All-Stars to the Rescue", "Thunderbirds are GO", "The Lorax", "The Cat in the Hat", "Binky Nelson Unpacified"], "profile_vector": null}}
+got user
+Parsed movie details 
+ liked : ['Memorial Day']
+ disliked: ['Madagascar', 'The Man from Snowy River', 'The Little Bear Movie', 'The Lorax']
+profile updated

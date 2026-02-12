@@ -1,0 +1,223 @@
+Data Preprocessing Service is running...
+Error communicating with Data Ingestion service: Resource temporarily unavailable
+{'status': 'error', 'message': 'Failed to get data from ingestion service'}
+Traceback (most recent call last):
+  File "D:\bremen\fate\ubung\assignment1\aia-e-assignments-group-8\Project\data_preprocessing_service.py", line 224, in run
+    socket.send_json(json.dumps({"status":"error","message":"Internal Error"}))
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 1018, in send_json
+    return self.send(msg, flags=flags, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 707, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "_zmq.py", line 1092, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1140, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1344, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 1339, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 179, in zmq.backend.cython._zmq._check_rc
+zmq.error.ZMQError: Operation cannot be accomplished in current state
+https://image.tmdb.org/t/p/w185/dfBROAe2wXgbB7NbksvVvT49vZW.jpg
+https://image.tmdb.org/t/p/w185/azeZdo0MfO3ZcDa0GzgAC7zVP5m.jpg
+https://image.tmdb.org/t/p/w185/nOspcG8HP6KPdMvzezavRbzYCEw.jpg
+https://image.tmdb.org/t/p/w185/3804sBcpgNvpNpLc53hb4MMB6f7.jpg
+https://image.tmdb.org/t/p/w185/Al8v2ASozhufxTiA7HVL7GAxi3y.jpg
+ZeroMQ Error: Operation cannot be accomplished in current state
+None
+Traceback (most recent call last):
+  File "D:\bremen\fate\ubung\assignment1\aia-e-assignments-group-8\Project\data_preprocessing_service.py", line 224, in run
+    socket.send_json(json.dumps({"status":"error","message":"Internal Error"}))
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 1018, in send_json
+    return self.send(msg, flags=flags, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 707, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "_zmq.py", line 1092, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1140, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1344, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 1339, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 179, in zmq.backend.cython._zmq._check_rc
+zmq.error.ZMQError: Operation cannot be accomplished in current state
+https://image.tmdb.org/t/p/w185/dfBROAe2wXgbB7NbksvVvT49vZW.jpg
+https://image.tmdb.org/t/p/w185/azeZdo0MfO3ZcDa0GzgAC7zVP5m.jpg
+https://image.tmdb.org/t/p/w185/nOspcG8HP6KPdMvzezavRbzYCEw.jpg
+https://image.tmdb.org/t/p/w185/3804sBcpgNvpNpLc53hb4MMB6f7.jpg
+https://image.tmdb.org/t/p/w185/Al8v2ASozhufxTiA7HVL7GAxi3y.jpg
+ZeroMQ Error: Operation cannot be accomplished in current state
+None
+Traceback (most recent call last):
+  File "D:\bremen\fate\ubung\assignment1\aia-e-assignments-group-8\Project\data_preprocessing_service.py", line 224, in run
+    socket.send_json(json.dumps({"status":"error","message":"Internal Error"}))
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 1018, in send_json
+    return self.send(msg, flags=flags, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 707, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "_zmq.py", line 1092, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1140, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1344, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 1339, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 179, in zmq.backend.cython._zmq._check_rc
+zmq.error.ZMQError: Operation cannot be accomplished in current state
+https://image.tmdb.org/t/p/w185/dfBROAe2wXgbB7NbksvVvT49vZW.jpg
+https://image.tmdb.org/t/p/w185/azeZdo0MfO3ZcDa0GzgAC7zVP5m.jpg
+https://image.tmdb.org/t/p/w185/nOspcG8HP6KPdMvzezavRbzYCEw.jpg
+https://image.tmdb.org/t/p/w185/3804sBcpgNvpNpLc53hb4MMB6f7.jpg
+https://image.tmdb.org/t/p/w185/Al8v2ASozhufxTiA7HVL7GAxi3y.jpg
+ZeroMQ Error: Operation cannot be accomplished in current state
+None
+Traceback (most recent call last):
+  File "D:\bremen\fate\ubung\assignment1\aia-e-assignments-group-8\Project\data_preprocessing_service.py", line 224, in run
+    socket.send_json(json.dumps({"status":"error","message":"Internal Error"}))
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 1018, in send_json
+    return self.send(msg, flags=flags, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 707, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "_zmq.py", line 1092, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1140, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1344, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 1339, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 179, in zmq.backend.cython._zmq._check_rc
+zmq.error.ZMQError: Operation cannot be accomplished in current state
+https://image.tmdb.org/t/p/w185/EwgwxuG69KNy1NW54albbXDo4V.jpg
+https://image.tmdb.org/t/p/w185/iONV8Xj4POQhHYoOycRLnH6NEhk.jpg
+https://image.tmdb.org/t/p/w185/oiQHeFbyQkLDSE3mfNtb8HnyNx9.jpg
+https://image.tmdb.org/t/p/w185/sVQjckgYnTParDP5Sd3Gq2uEDow.jpg
+https://image.tmdb.org/t/p/w185/eu6zEhpt9QVgZk8T4FJCwKCbJkq.jpg
+ZeroMQ Error: Operation cannot be accomplished in current state
+None
+Traceback (most recent call last):
+  File "D:\bremen\fate\ubung\assignment1\aia-e-assignments-group-8\Project\data_preprocessing_service.py", line 224, in run
+    socket.send_json(json.dumps({"status":"error","message":"Internal Error"}))
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 1018, in send_json
+    return self.send(msg, flags=flags, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 707, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "_zmq.py", line 1092, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1140, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1344, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 1339, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 179, in zmq.backend.cython._zmq._check_rc
+zmq.error.ZMQError: Operation cannot be accomplished in current state
+https://image.tmdb.org/t/p/w185/dfBROAe2wXgbB7NbksvVvT49vZW.jpg
+https://image.tmdb.org/t/p/w185/azeZdo0MfO3ZcDa0GzgAC7zVP5m.jpg
+https://image.tmdb.org/t/p/w185/nOspcG8HP6KPdMvzezavRbzYCEw.jpg
+https://image.tmdb.org/t/p/w185/3804sBcpgNvpNpLc53hb4MMB6f7.jpg
+https://image.tmdb.org/t/p/w185/Al8v2ASozhufxTiA7HVL7GAxi3y.jpg
+ZeroMQ Error: Operation cannot be accomplished in current state
+None
+Traceback (most recent call last):
+  File "D:\bremen\fate\ubung\assignment1\aia-e-assignments-group-8\Project\data_preprocessing_service.py", line 224, in run
+    socket.send_json(json.dumps({"status":"error","message":"Internal Error"}))
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 1018, in send_json
+    return self.send(msg, flags=flags, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 707, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "_zmq.py", line 1092, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1140, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1344, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 1339, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 179, in zmq.backend.cython._zmq._check_rc
+zmq.error.ZMQError: Operation cannot be accomplished in current state
+https://image.tmdb.org/t/p/w185/dfBROAe2wXgbB7NbksvVvT49vZW.jpg
+https://image.tmdb.org/t/p/w185/azeZdo0MfO3ZcDa0GzgAC7zVP5m.jpg
+https://image.tmdb.org/t/p/w185/nOspcG8HP6KPdMvzezavRbzYCEw.jpg
+https://image.tmdb.org/t/p/w185/3804sBcpgNvpNpLc53hb4MMB6f7.jpg
+https://image.tmdb.org/t/p/w185/Al8v2ASozhufxTiA7HVL7GAxi3y.jpg
+ZeroMQ Error: Operation cannot be accomplished in current state
+None
+Traceback (most recent call last):
+  File "D:\bremen\fate\ubung\assignment1\aia-e-assignments-group-8\Project\data_preprocessing_service.py", line 224, in run
+    socket.send_json(json.dumps({"status":"error","message":"Internal Error"}))
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 1018, in send_json
+    return self.send(msg, flags=flags, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 707, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "_zmq.py", line 1092, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1140, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1344, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 1339, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 179, in zmq.backend.cython._zmq._check_rc
+zmq.error.ZMQError: Operation cannot be accomplished in current state
+https://image.tmdb.org/t/p/w185/dfBROAe2wXgbB7NbksvVvT49vZW.jpg
+https://image.tmdb.org/t/p/w185/azeZdo0MfO3ZcDa0GzgAC7zVP5m.jpg
+https://image.tmdb.org/t/p/w185/nOspcG8HP6KPdMvzezavRbzYCEw.jpg
+https://image.tmdb.org/t/p/w185/3804sBcpgNvpNpLc53hb4MMB6f7.jpg
+https://image.tmdb.org/t/p/w185/Al8v2ASozhufxTiA7HVL7GAxi3y.jpg
+ZeroMQ Error: Operation cannot be accomplished in current state
+None
+Traceback (most recent call last):
+  File "D:\bremen\fate\ubung\assignment1\aia-e-assignments-group-8\Project\data_preprocessing_service.py", line 224, in run
+    socket.send_json(json.dumps({"status":"error","message":"Internal Error"}))
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 1018, in send_json
+    return self.send(msg, flags=flags, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 707, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "_zmq.py", line 1092, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1140, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1344, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 1339, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 179, in zmq.backend.cython._zmq._check_rc
+zmq.error.ZMQError: Operation cannot be accomplished in current state
+https://image.tmdb.org/t/p/w185/dfBROAe2wXgbB7NbksvVvT49vZW.jpg
+https://image.tmdb.org/t/p/w185/azeZdo0MfO3ZcDa0GzgAC7zVP5m.jpg
+https://image.tmdb.org/t/p/w185/nOspcG8HP6KPdMvzezavRbzYCEw.jpg
+https://image.tmdb.org/t/p/w185/3804sBcpgNvpNpLc53hb4MMB6f7.jpg
+https://image.tmdb.org/t/p/w185/Al8v2ASozhufxTiA7HVL7GAxi3y.jpg
+ZeroMQ Error: Operation cannot be accomplished in current state
+None
+Traceback (most recent call last):
+  File "D:\bremen\fate\ubung\assignment1\aia-e-assignments-group-8\Project\data_preprocessing_service.py", line 224, in run
+    socket.send_json(json.dumps({"status":"error","message":"Internal Error"}))
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 1018, in send_json
+    return self.send(msg, flags=flags, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 707, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "_zmq.py", line 1092, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1140, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1344, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 1339, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 179, in zmq.backend.cython._zmq._check_rc
+zmq.error.ZMQError: Operation cannot be accomplished in current state
+https://image.tmdb.org/t/p/w185/dfBROAe2wXgbB7NbksvVvT49vZW.jpg
+https://image.tmdb.org/t/p/w185/azeZdo0MfO3ZcDa0GzgAC7zVP5m.jpg
+https://image.tmdb.org/t/p/w185/nOspcG8HP6KPdMvzezavRbzYCEw.jpg
+https://image.tmdb.org/t/p/w185/3804sBcpgNvpNpLc53hb4MMB6f7.jpg
+https://image.tmdb.org/t/p/w185/Al8v2ASozhufxTiA7HVL7GAxi3y.jpg
+ZeroMQ Error: Operation cannot be accomplished in current state
+None
+Traceback (most recent call last):
+  File "D:\bremen\fate\ubung\assignment1\aia-e-assignments-group-8\Project\data_preprocessing_service.py", line 224, in run
+    socket.send_json(json.dumps({"status":"error","message":"Internal Error"}))
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 1018, in send_json
+    return self.send(msg, flags=flags, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\softwares\Anaconda\envs\movie_recommendation\Lib\site-packages\zmq\sugar\socket.py", line 707, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "_zmq.py", line 1092, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1140, in zmq.backend.cython._zmq.Socket.send
+  File "_zmq.py", line 1344, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 1339, in zmq.backend.cython._zmq._send_copy
+  File "_zmq.py", line 179, in zmq.backend.cython._zmq._check_rc
+zmq.error.ZMQError: Operation cannot be accomplished in current state
+https://image.tmdb.org/t/p/w185/dfBROAe2wXgbB7NbksvVvT49vZW.jpg
+https://image.tmdb.org/t/p/w185/azeZdo0MfO3ZcDa0GzgAC7zVP5m.jpg
+https://image.tmdb.org/t/p/w185/nOspcG8HP6KPdMvzezavRbzYCEw.jpg
+https://image.tmdb.org/t/p/w185/3804sBcpgNvpNpLc53hb4MMB6f7.jpg
+https://image.tmdb.org/t/p/w185/Al8v2ASozhufxTiA7HVL7GAxi3y.jpg
+ZeroMQ Error: Operation cannot be accomplished in current state
+None

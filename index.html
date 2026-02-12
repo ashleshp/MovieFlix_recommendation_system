@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MovieFlix Recommendation System</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Montserrat:700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHq+2zC8n4+0x4F8rYf9W5W3F1q9bN6LrQKXrFxP9xg2RkAa3HdO8F9x+3xOWcF6K/h3I1Vw==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <style>
+        /* ===== RESET & BASE ===== */
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #141414;
+            color: #fff;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        /* General hidden class */
+        
+        .hidden {
+            display: none !important;
+        }
+        /* ===== NAVBAR ===== */
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(20, 20, 20, 0.9);
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            z-index: 1000;
+        }
+        
+        .navbar .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e50914;
+        }
+        
+        .navbar .nav-links {
+            display: flex;
+            list-style: none;
+            margin-left: 30px;
+        }
+        
+        .navbar .nav-links li {
+            margin: 0 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar .nav-links li:hover {
+            color: #e50914;
+        }
+        
+        .navbar .nav-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .navbar .nav-right .search-bar {
+            position: relative;
+            margin-right: 20px;
+        }
+        
+        .navbar .nav-right .search-bar input {
+            padding: 5px 30px 5px 10px;
+            border-radius: 4px;
+            border: none;
+            outline: none;
+            background: #333;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        
+        .navbar .nav-right .search-bar i {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+        
+        .navbar .nav-right .toggle-theme {
+            margin-right: 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .navbar .nav-right .profile {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #999;
+            cursor: pointer;
+        }
+        /* Fix the Fetch Recommendations button at the bottom right */
+        
+        .profile {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            overflow: hidden;
+            /* Ensures the image stays inside the circle */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .profile img {
+            width: 100%;
+            /* Ensures it fills the container */
+            height: 100%;
+            object-fit: cover;
+            /* Ensures proper fitting */
+            border-radius: 50%;
+            /* Ensures it's round */
+        }
+        
+        .logout-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            /* Adds spacing between icon and text */
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+        
+        .logout-container:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .logout-container img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+        
+        #fetchBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1500;
+            padding: 10px 15px;
+            font-size: 1rem;
+            background: #e50914;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        #fetchBtn:hover {
+            background: #f40612;
+        }
+        
+        #submitFeedbackBtn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1500;
+            padding: 10px 15px;
+            font-size: 1rem;
+            background: #e50914;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        #submitFeedbackBtn:hover {
+            background: #f40612;
+        }
+        /* ===== AUTH MODAL (LOGIN/SIGNUP) ===== */
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1100;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.hidden {
+            display: none;
+        }
+        
+        .auth-box {
+            background: rgba(20, 20, 20, 0.95);
+            padding: 40px 30px;
+            border-radius: 8px;
+            width: 350px;
+            text-align: center;
+            position: relative;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .auth-box h2 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .auth-box input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+            background: #333;
+            color: #fff;
+            font-size: 1rem;
+        }
+        
+        .auth-box button {
+            width: 100%;
+            padding: 12px;
+            background: #e50914;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1rem;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .auth-box button:hover {
+            background: #f40612;
+        }
+        
+        .auth-box .toggle-auth {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: #b3b3b3;
+            transition: color 0.3s ease;
+        }
+        
+        .auth-box .toggle-auth:hover {
+            color: #fff;
+        }
+        
+        .auth-social {
+            margin-top: 15px;
+        }
+        
+        .auth-social button {
+            width: 48%;
+            padding: 10px;
+            margin: 5px 1%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        
+        .auth-social .google {
+            background: #db4437;
+            color: #fff;
+        }
+        
+        .auth-social .facebook {
+            background: #3b5998;
+            color: #fff;
+        }
+        /* ===== MAIN CONTENT ===== */
+        
+        main {
+            max-width: 1200px;
+            /* Set a max width */
+            margin: 0 auto;
+            /* Centers the content */
+            padding: 80px 20px 100px;
+            /* Adjusted padding to avoid overlap */
+            min-height: 100vh;
+            background: #141414;
+            transition: background 0.3s ease;
+        }
+        
+        main.hidden {
+            display: none;
+        }
+        
+        .welcome-message {
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+        /* ===== CAROUSEL / MOVIE CARDS ===== */
+        
+        .carousel-section {
+            margin: 20px 40px;
+        }
+        
+        .carousel-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 10px;
+            scroll-behavior: smooth;
+        }
+        
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .movie-card {
+            position: relative;
+            flex: 0 0 auto;
+            width: 200px;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .movie-card:hover {
+            transform: scale(1.08);
+        }
+        
+        .movie-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .movie-overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            /* Slightly transparent black */
+            backdrop-filter: blur(6px);
+            /* More glass-like */
+            border-radius: 4px;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .movie-card:hover .movie-overlay {
+            opacity: 1;
+        }
+        
+        .movie-overlay h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .movie-overlay p {
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .movie-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+        }
+        
+        .movie-actions button {
+            padding: 5px 8px;
+            background: #e50914;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .movie-actions button:hover {
+            background: #f40612;
+        }
+        /* Feedback indicator on cards */
+        
+        .feedback-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: scale(0);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .feedback-indicator.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        /* ===== SKELETON LOADER ===== */
+        
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .skeleton {
+            background: #333;
+            width: 200px;
+            height: 300px;
+            margin: 0 15px;
+            border-radius: 4px;
+            animation: shimmer 1.5s infinite;
+            background: linear-gradient( to right, #333 0%, #444 20%, #333 40%, #333 100%);
+            background-size: 800px 300px;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -800px 0;
+            }
+            100% {
+                background-position: 800px 0;
+            }
+        }
+        /* ===== MOVIE OVERVIEW MODAL ===== */
+        
+        .movie-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1200;
+            padding: 20px;
+            overflow-y: auto;
+            transition: opacity 0.3s ease;
+        }
+        
+        .movie-modal.hidden {
+            display: none;
+        }
+        
+        .movie-modal-content {
+            background: #141414;
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            animation: fadeInUp 0.5s ease;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .movie-details {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .movie-details img {
+            width: 300px;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        .movie-info {
+            padding: 20px;
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .movie-info h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .movie-info p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        
+        .back-btn {
+            background: #e50914;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+        
+        .back-btn:hover {
+            background: #f40612;
+        }
+        /* ===== ANIMATION FOR MODALS ===== */
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* ===== RESPONSIVE ===== */
+        
+        @media (max-width: 768px) {
+            .movie-details {
+                flex-direction: column;
+                align-items: center;
+            }
+            .movie-details img {
+                width: 90%;
+            }
+            .movie-info {
+                padding: 15px;
+            }
+            .navbar {
+                padding: 0 15px;
+            }
+            .navbar .nav-links {
+                display: none;
+            }
+        }
+        /* User Details Modal Styles */
+        
+        .user-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1200;
+            padding: 20px;
+            overflow-y: auto;
+            transition: opacity 0.3s ease;
+        }
+        
+        .user-modal.hidden {
+            display: none;
+        }
+        
+        .user-modal-content {
+            background: #141414;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            /* Maximum height of 80% of viewport height */
+            overflow-y: auto;
+            /* Enable vertical scrolling if content exceeds height */
+            animation: fadeInUp 0.5s ease;
+            position: relative;
+        }
+        
+        .user-details h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .user-details p,
+        .user-details ul {
+            font-size: 1rem;
+            margin: 10px 0;
+            color: #ccc;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10;
+        }
+        /* Toggle Switch Styles */
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+        
+        input:checked+.slider {
+            background-color: #e50914;
+        }
+        
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+        /* Segmented Control / Button Group */
+        
+        .segmented-control {
+            display: flex;
+            border: 1px solid #666;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #222;
+            height: 30px;
+        }
+        
+        .seg-btn {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            padding: 5px 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 90px;
+            text-align: center;
+        }
+        
+        .seg-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .seg-btn.active {
+            background-color: #e50914;
+            color: white;
+            border-radius: 20px;
+        }
+        
+        .segmented-li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        /* #modelLabel {
+            font-size: 0.9rem;
+            color: #bbb;
+            white-space: nowrap;
+        } */
+        /* Search Results Modal */
+        
+        .search-results-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            /* Smoked black overlay */
+            backdrop-filter: blur(10px);
+            /* Frosted blur effect */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .search-results-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* Search results container */
+        
+        .search-results-container {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(20, 20, 20, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+        
+        .search-results-container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        /* Movie cards inside search results */
+        
+        .search-movie-card {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+            transition: background 0.3s ease;
+        }
+        
+        .search-movie-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .search-movie-card img {
+            width: 60px;
+            height: 90px;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+        
+        .search-movie-card .movie-info {
+            flex: 1;
+            color: #fff;
+            text-align: left;
+        }
+        
+        .search-movie-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        /* Close button */
+        
+        .close-search-btn {
+            background: #e50914;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .close-search-btn:hover {
+            background: #f40612;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="logo">MovieFlix</div>
+        <ul class="nav-links">
+            <li onclick="window.location.href='index.html'">Home</li>
+            <li onclick="openAddMovieModal()">Add Movie</li>
+            <!-- ... other nav items ... -->
+            <!-- Segmented control in its own list item -->
+            <li class="segmented-li">
+                <div class="segmented-control">
+                    <button id="profileBtn" class="seg-btn active" onclick="switchModelSegment('profile')">
+                ProfileVector
+              </button>
+                    <button id="twoTowerBtn" class="seg-btn" onclick="switchModelSegment('twotower')">
+                TwoTower
+              </button>
+                </div>
+                <!-- Optional label next to the buttons -->
+                <!-- <span id="modelLabel" style="margin-left: 10px;">ProfileVector Model</span> -->
+            </li>
+        </ul>
+        <div class="nav-right">
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." aria-label="Search movies" />
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="toggle-theme" onclick="toggleTheme()" title="Toggle Light/Dark"><i class="fas fa-adjust"></i></div>
+            <div class="profile" title="Profile">
+                <img src="https://i.pravatar.cc/30?img=3" alt="Profile Avatar">
+            </div>
+
+
+
+            <div class="logout-container" onclick="logout()" title="Logout">
+                <img src="https://cdn-icons-png.flaticon.com/256/4400/4400828.png" alt="Logout Icon">
+                <span>Logout</span>
+            </div>
+        </div>
+    </nav>
+    <div id="userDetailsModal" class="modal user-modal hidden">
+        <div class="user-modal-content">
+            <button class="close-modal" onclick="closeUserModal()" aria-label="Close">&times;</button>
+            <div class="user-details">
+                <h2 id="userNameDetail">User Name</h2>
+                <p><strong>Liked Movies:</strong></p>
+                <ul id="likedMoviesList"></ul>
+                <p><strong>Disliked Movies:</strong></p>
+                <ul id="dislikedMoviesList"></ul>
+                <button class="back-btn" onclick="closeUserModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== AUTH MODAL (LOGIN/SIGNUP) ===== -->
+    <div id="authModal" class="modal">
+        <!-- By default, only the login form is visible; the signup form has the .hidden class -->
+        <div class="auth-box" id="loginBox">
+            <h2>Sign In</h2>
+            <input type="email" id="loginEmail" placeholder="Email" required />
+            <input type="password" id="loginPassword" placeholder="Password" required />
+            <button onclick="login()">Sign In</button>
+            <div class="auth-social">
+                <button class="google">Google</button>
+                <button class="facebook">Facebook</button>
+            </div>
+            <div class="toggle-auth" onclick="showSignup()">New to MovieFlix? Sign up now</div>
+        </div>
+        <div class="auth-box hidden" id="signupBox">
+            <h2>Sign Up</h2>
+            <input type="email" id="regEmail" placeholder="Email" required />
+            <input type="password" id="regPassword" placeholder="Password" required />
+            <input type="number" id="regAge" placeholder="Age" required />
+            <input type="text" id="regCountry" placeholder="Country" required />
+            <input type="text" id="regGenres" placeholder="Preferred Genres (comma separated)" required />
+            <button onclick="register()">Sign Up</button>
+            <div class="toggle-auth" onclick="showLogin()">Already have an account? Sign in</div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT (HIDDEN UNTIL LOGIN) ===== -->
+    <main id="mainContent" class="hidden">
+        <div class="welcome-message">Welcome back, <span id="userName">User</span>!</div>
+
+        <!-- Personal (Recommended) Movies Carousel -->
+        <section class="carousel-section">
+            <h2>Recommended for You</h2>
+            <div id="recommendedCarousel" class="carousel">
+                <!-- Movie cards appended dynamically -->
+            </div>
+        </section>
+
+        <!-- Director-Based Picks Carousel -->
+        <section class="carousel-section">
+            <h2>Director-Based Picks</h2>
+            <p id="directorInfo" class="director-info" style="text-align:center; color:#b3b3b3;"></p>
+            <div id="directorCarousel" class="carousel">
+                <!-- Director-based movie cards appended dynamically -->
+            </div>
+        </section>
+
+        <!-- Community Picks Carousel -->
+        <section class="carousel-section">
+            <h2>Community Picks</h2>
+            <div id="communityCarousel" class="carousel">
+                <!-- Community picks movie cards appended dynamically -->
+            </div>
+        </section>
+
+        <!-- Skeleton Loader (hidden by default) -->
+        <div class="loader hidden" id="loader">
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+        </div>
+
+        <button id="fetchBtn" class="fetch-btn" style="
+              display: block;
+              margin: 20px auto;
+              background: #e50914;
+              border: none;
+              padding: 10px 20px;
+              border-radius: 4px;
+              cursor: pointer;
+              transition: background 0.3s ease;
+          " onclick="getRecommendations()">
+          Fetch Recommendations
+      </button>
+    </main>
+    <div id="searchResultsOverlay" class="search-results-overlay">
+        <div class="search-results-container">
+            <h2>Search Results</h2>
+            <div id="searchResultsList"></div>
+            <button class="close-search-btn" onclick="closeSearchResults()">Close</button>
+        </div>
+    </div>
+
+    <!-- ===== MOVIE OVERVIEW MODAL ===== -->
+    <div id="movieModal" class="modal movie-modal hidden">
+        <div class="movie-modal-content">
+            <button class="close-modal" onclick="closeMovieModal()" aria-label="Close">&times;</button>
+            <div class="movie-details">
+                <img id="moviePoster" src="" alt="Movie Poster" />
+                <div class="movie-info">
+                    <h2 id="movieTitle"></h2>
+                    <p><strong>Genres:</strong> <span id="movieGenres"></span></p>
+                    <p><strong>Director:</strong> <span id="movieDirector"></span></p>
+                    <p><strong>Cast:</strong> <span id="movieCast"></span></p>
+                    <p><strong>Overview:</strong> <span id="movieOverviewText"></span></p>
+                    <p><strong>Vote Average:</strong> <span id="movieVote"></span></p>
+                    <button class="back-btn" onclick="closeMovieModal()">Back to Recommendations</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add New Movie Modal -->
+    <div id="addMovieModal" class="modal hidden">
+        <div class="auth-box" style="max-width:400px; text-align:center;">
+            <h2>Add New Movie</h2>
+            <input type="number" id="movieIdInput" placeholder="Enter Movie ID" style="width: 100%; padding: 10px; margin: 10px 0; border-radius:4px; border: none;" />
+            <button onclick="submitNewMovie()" style="width:100%; padding:10px; background:#e50914; color:#fff; border:none; border-radius:4px; margin-top:10px; cursor:pointer;">Submit</button>
+            <button onclick="closeAddMovieModal()" style="width:100%; padding:10px; background:#333; color:#fff; border:none; border-radius:4px; margin-top:10px; cursor:pointer;">Cancel</button>
+        </div>
+    </div>
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        let token = "";
+        let recommendationsData = {};
+        let directorBasedData = null;
+        let communityPicksData = null;
+        let feedback = {};
+
+        // ----- Toggle Theme -----
+        function toggleTheme() {
+            if (document.body.style.backgroundColor === 'rgb(20, 20, 20)' || document.body.style.backgroundColor === '') {
+                document.body.style.backgroundColor = "#f4f4f4";
+                document.body.style.color = "#141414";
+            } else {
+                document.body.style.backgroundColor = "#141414";
+                document.body.style.color = "#fff";
+            }
+        }
+
+
+        async function switchModelSegment(selectedModel) {
+            // Check eligibility using profile details
+            const profileData = await getProfileDetails();
+            if (profileData && profileData.liked_movies.length < 2 && selectedModel === "twotower") {
+                alert("You need to like at least 2 movies to use the TwoTower model.");
+                return;
+            }
+
+            // Update UI: mark the selected button as active
+            document.getElementById("profileBtn").classList.remove("active");
+            document.getElementById("twoTowerBtn").classList.remove("active");
+
+            if (selectedModel === "twotower") {
+                document.getElementById("twoTowerBtn").classList.add("active");
+            } else {
+                document.getElementById("profileBtn").classList.add("active");
+            }
+
+            // Prepare payload for API request
+            const useTwoTower = (selectedModel === "twotower");
+
+            try {
+                const response = await fetch("http://127.0.0.1:8000/switch_model", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        use_two_tower: useTwoTower
+                    })
+                });
+                const result = await response.json();
+                alert(result.message);
+                // Update model label
+                //document.getElementById("modelLabel").innerText = useTwoTower ? "TwoTower Model" : "ProfileVector Model";
+            } catch (error) {
+                console.error("Error switching model:", error);
+                alert("Failed to switch model.");
+            }
+        }
+
+
+        // ----- Show/Hide Auth Forms -----
+        function showSignup() {
+            document.getElementById('loginBox').classList.add("hidden");
+            document.getElementById('signupBox').classList.remove("hidden");
+        }
+
+        function showLogin() {
+            document.getElementById('signupBox').classList.add("hidden");
+            document.getElementById('loginBox').classList.remove("hidden");
+        }
+
+        // ----- Register -----
+        async function register() {
+            const data = {
+                email: document.getElementById('regEmail').value,
+                password: document.getElementById('regPassword').value,
+                age: parseInt(document.getElementById('regAge').value),
+                country: document.getElementById('regCountry').value,
+                preferred_genres: document.getElementById('regGenres').value.split(',')
+            };
+            try {
+                const response = await fetch("http://127.0.0.1:8000/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                alert(result.message || "Registered successfully!");
+                showLogin();
+            } catch (error) {
+                console.error("Registration error:", error);
+                alert("Registration failed.");
+            }
+        }
+        async function checkModelToggleEligibility() {
+            const profileData = await getProfileDetails();
+            const modelSwitch = document.getElementById("modelSwitch");
+            //const modelLabel = document.getElementById("modelLabel");
+            if (profileData && profileData.liked_movies.length < 2) {
+                modelSwitch.disabled = true;
+                //modelLabel.innerText = "Switch (Disabled: Like at least 2 movies)";
+            } else {
+                modelSwitch.disabled = false;
+                // Optionally, reset the label to the current model (e.g., ProfileVector Model)
+                //modelLabel.innerText = "ProfileVector Model";
+            }
+        }
+        // ----- Login -----
+        async function login() {
+            const data = {
+                email: document.getElementById('loginEmail').value,
+                password: document.getElementById('loginPassword').value
+            };
+            try {
+                const response = await fetch("http://127.0.0.1:8000/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                if (result.access_token) {
+                    token = result.access_token;
+                    alert("Login successful!");
+                    document.getElementById('userName').innerText = data.email.split('@')[0];
+                    document.getElementById('authModal').classList.add("hidden");
+                    document.getElementById('mainContent').classList.remove("hidden");
+                    checkModelToggleEligibility();
+                } else {
+                    alert("Login failed!");
+                }
+            } catch (error) {
+                console.error("Login error:", error);
+                alert("Login failed!");
+            }
+        }
+
+        function logout() {
+            // Optionally, call a backend logout endpoint:
+            fetch("http://127.0.0.1:8000/logout", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            // Clear the token and user data
+            token = "";
+            // Optionally remove token from localStorage if used:
+            // localStorage.removeItem("token");
+
+            // Reset the UI: hide main content and show auth modal
+            document.getElementById("authModal").classList.remove("hidden");
+            document.getElementById("mainContent").classList.add("hidden");
+            alert("Logged out successfully!");
+        }
+
+        // ----- Fetch Recommendations -----
+        async function getRecommendations() {
+            const loader = document.getElementById("loader");
+            const recCarousel = document.getElementById("recommendedCarousel");
+            const dirCarousel = document.getElementById("directorCarousel");
+            const communityCarousel = document.getElementById("communityCarousel");
+
+            loader.classList.remove("hidden");
+            recCarousel.innerHTML = "";
+            dirCarousel.innerHTML = "";
+            communityCarousel.innerHTML = "";
+
+            try {
+                const response = await fetch("http://127.0.0.1:8000/recommend", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        num_recommendations: 5
+                    })
+                });
+                const result = await response.json();
+
+                // Personal (Recommended) Movies
+                recommendationsData = result.recommendations;
+                displayRecommendations(result.recommendations);
+
+                // Director-Based
+                if (
+                    result.director_based &&
+                    Array.isArray(result.director_based.recommendations) &&
+                    result.director_based.recommendations.length > 0
+                ) {
+                    directorBasedData = result.director_based;
+                    displayDirectorBasedRecommendations(result.director_based);
+                } else {
+                    dirCarousel.innerHTML =
+                        "<p style='text-align:center;color:#b3b3b3;width:100%;'>No director-based recommendations available.</p>";
+                }
+
+                // Community Picks
+                if (result.community_picks && Object.keys(result.community_picks).length > 0) {
+                    communityPicksData = result.community_picks;
+                    displayCommunityPicks(result.community_picks);
+                } else {
+                    communityCarousel.innerHTML =
+                        "<p style='text-align:center;color:#b3b3b3;width:100%;'>No community picks available.</p>";
+                }
+            } catch (error) {
+                console.error("Error fetching recommendations:", error);
+                alert("An error occurred while fetching recommendations.");
+            } finally {
+                loader.classList.add("hidden");
+            }
+        }
+
+        // ----- Display Personal (Recommended) Movies -----
+        function displayRecommendations(recommendations) {
+            const recCarousel = document.getElementById('recommendedCarousel');
+            recCarousel.innerHTML = '';
+
+            Object.entries(recommendations).forEach(([id, movie]) => {
+                const card = document.createElement('div');
+                card.className = 'movie-card';
+                card.innerHTML = `
+                  <img src="${movie.poster_path}" alt="${movie.title} Poster" />
+                  <div class="feedback-indicator" id="feedback-${id}"></div>
+                  <div class="movie-overlay">
+                      <h3>${movie.title}</h3>
+                      <p>${movie.genres}</p>
+                      <p>${movie.vote_average}/10</p>
+                      <div class="movie-actions">
+                          <button class="details-btn" data-id="${id}" aria-label="View Details">Details</button>
+                          <button class="like-btn" data-id="${id}" aria-label="Like">Like</button>
+                          <button class="dislike-btn" data-id="${id}" aria-label="Dislike">Dislike</button>
+                      </div>
+                  </div>
+              `;
+                recCarousel.appendChild(card);
+
+                // Attach event listeners
+                card.querySelector('.details-btn').addEventListener('click', function() {
+                    const movieId = this.getAttribute('data-id');
+                    viewMovieDetails(movieId);
+                });
+                card.querySelector('.like-btn').addEventListener('click', function() {
+                    setFeedback(this.getAttribute('data-id'), 'like');
+                });
+                card.querySelector('.dislike-btn').addEventListener('click', function() {
+                    setFeedback(this.getAttribute('data-id'), 'dislike');
+                });
+            });
+
+            // Submit Feedback button
+            const submitFeedbackBtn = document.createElement('button');
+            submitFeedbackBtn.id = "submitFeedbackBtn";
+            submitFeedbackBtn.innerText = "Submit Feedback";
+            submitFeedbackBtn.style.cssText =
+                "background:#e50914; color:#fff; border:none; padding:10px 15px; border-radius:4px; cursor:pointer; margin:20px auto; display:block; transition: background 0.3s ease;";
+            submitFeedbackBtn.addEventListener('click', submitFeedback);
+            recCarousel.appendChild(submitFeedbackBtn);
+        }
+
+        // ----- Display Director-Based Movies (No Change) -----
+        function displayDirectorBasedRecommendations(directorBased) {
+            const dirCarousel = document.getElementById('directorCarousel');
+            document.getElementById('directorInfo').innerHTML = `Based on <strong>${directorBased.matched_movie}</strong> by <strong>${directorBased.director}</strong>`;
+
+            directorBased.recommendations.forEach(movie => {
+                const card = document.createElement('div');
+                card.className = 'movie-card';
+                card.innerHTML = `
+                  <img src="${movie.poster_path}" alt="${movie.title} Poster" />
+                  <div class="feedback-indicator" id="feedback-${movie.movie_id}"></div>
+                  <div class="movie-overlay">
+                      <h3>${movie.title}</h3>
+                      <p>${movie.genres}</p>
+                      <p>${movie.vote_average}/10</p>
+                      <div class="movie-actions">
+                          <button class="details-btn" data-id="${movie.movie_id}" aria-label="View Details">Details</button>
+                          <button class="like-btn" data-id="${movie.movie_id}" aria-label="Like">Like</button>
+                          <button class="dislike-btn" data-id="${movie.movie_id}" aria-label="Dislike">Dislike</button>
+                      </div>
+                  </div>
+              `;
+                dirCarousel.appendChild(card);
+
+                card.querySelector('.details-btn').addEventListener('click', function() {
+                    viewMovieDetails(this.getAttribute('data-id'));
+                });
+                card.querySelector('.like-btn').addEventListener('click', function() {
+                    setFeedback(this.getAttribute('data-id'), 'like');
+                });
+                card.querySelector('.dislike-btn').addEventListener('click', function() {
+                    setFeedback(this.getAttribute('data-id'), 'dislike');
+                });
+            });
+        }
+
+        // ----- Display Community Picks (Ensure Consistency) -----
+        function displayCommunityPicks(communityData) {
+            const communityCarousel = document.getElementById('communityCarousel');
+            communityCarousel.innerHTML = '';
+
+            // Use Object.entries to get [id, movie] just like personal recommendations
+            Object.entries(communityData).forEach(([id, movie]) => {
+                const card = document.createElement('div');
+                card.className = 'movie-card';
+                card.innerHTML = `
+                  <img src="${movie.poster_path}" alt="${movie.title} Poster" />
+                  <div class="feedback-indicator" id="feedback-${id}"></div>
+                  <div class="movie-overlay">
+                      <h3>${movie.title}</h3>
+                      <p>${movie.genres}</p>
+                      <p>${movie.vote_average}/10</p>
+                      <div class="movie-actions">
+                          <button class="details-btn" data-id="${id}" aria-label="View Details">Details</button>
+                          <button class="like-btn" data-id="${id}" aria-label="Like">Like</button>
+                          <button class="dislike-btn" data-id="${id}" aria-label="Dislike">Dislike</button>
+                      </div>
+                  </div>
+              `;
+                communityCarousel.appendChild(card);
+
+                // Attach event listeners
+                card.querySelector('.details-btn').addEventListener('click', function() {
+                    viewMovieDetails(this.getAttribute('data-id'));
+                });
+                card.querySelector('.like-btn').addEventListener('click', function() {
+                    setFeedback(this.getAttribute('data-id'), 'like');
+                });
+                card.querySelector('.dislike-btn').addEventListener('click', function() {
+                    setFeedback(this.getAttribute('data-id'), 'dislike');
+                });
+            });
+        }
+
+        // ----- View Movie Details -----
+        function viewMovieDetails(movieId) {
+            // 1) Check personal recommendations
+            let movie = recommendationsData[movieId];
+
+            // 2) Check director-based data
+            if (!movie && directorBasedData) {
+                for (const m of directorBasedData.recommendations) {
+                    if (String(m.movie_id) === String(movieId)) {
+                        movie = m;
+                        break;
+                    }
+                }
+            }
+
+            // 3) Check community picks data
+            if (!movie && communityPicksData && communityPicksData[movieId]) {
+                movie = communityPicksData[movieId];
+            }
+
+            if (movie) {
+                document.getElementById('moviePoster').src = movie.poster_path;
+                document.getElementById('movieTitle').innerText = movie.title;
+                document.getElementById('movieGenres').innerText = movie.genres;
+                document.getElementById('movieDirector').innerText = movie.director;
+                document.getElementById('movieCast').innerText = movie.cast;
+                document.getElementById('movieOverviewText').innerText = movie.overview;
+                document.getElementById('movieVote').innerText = `${movie.vote_average} (${movie.vote_count} votes)`;
+                document.getElementById('movieModal').classList.remove("hidden");
+            } else {
+                alert("Movie details not found.");
+            }
+        }
+
+        // ----- Close Movie Modal -----
+        function closeMovieModal() {
+            document.getElementById('movieModal').classList.add("hidden");
+        }
+
+        // ----- Set Feedback (Like / Dislike) -----
+        function setFeedback(movieId, action) {
+            feedback[movieId] = action;
+            const indicator = document.getElementById("feedback-" + movieId);
+            if (indicator) {
+                if (action === 'like') {
+                    indicator.innerHTML = '<i class="fas fa-thumbs-up"></i>';
+                    indicator.style.color = "#e50914";
+                } else if (action === 'dislike') {
+                    indicator.innerHTML = '<i class="fas fa-thumbs-down"></i>';
+                    indicator.style.color = "#f40612";
+                }
+                indicator.classList.add("active");
+                setTimeout(() => {
+                    indicator.classList.remove("active");
+                }, 1000);
+            }
+        }
+
+        // ----- Submit Feedback -----
+        async function submitFeedback() {
+            try {
+                const response = await fetch("http://127.0.0.1:8000/feedback", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        feedback
+                    })
+                });
+                const result = await response.json();
+                alert(result.message || "Feedback submitted successfully!");
+                feedback = {};
+            } catch (error) {
+                console.error("Error submitting feedback:", error);
+                alert("Failed to submit feedback.");
+            }
+        }
+
+
+        // Call this function when you want to show the user details modal.
+        function openUserModal(userData) {
+            // Example: userData = { name: "John Doe", likedMovies: ["Movie A", "Movie B"], dislikedMovies: ["Movie C"] }
+            document.getElementById("userNameDetail").innerText = userData.name;
+
+            const likedList = document.getElementById("likedMoviesList");
+            likedList.innerHTML = "";
+            userData.likedMovies.forEach(movie => {
+                const li = document.createElement("li");
+                li.innerText = movie; // Or movie.title if movie is an object
+                likedList.appendChild(li);
+            });
+
+            const dislikedList = document.getElementById("dislikedMoviesList");
+            dislikedList.innerHTML = "";
+            userData.dislikedMovies.forEach(movie => {
+                const li = document.createElement("li");
+                li.innerText = movie;
+                dislikedList.appendChild(li);
+            });
+
+            document.getElementById("userDetailsModal").classList.remove("hidden");
+        }
+
+        function closeUserModal() {
+            document.getElementById("userDetailsModal").classList.add("hidden");
+        }
+
+        // Function to fetch profile details from the backend
+        async function getProfileDetails() {
+            try {
+                const response = await fetch("http://127.0.0.1:8000/profile_details", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+                const profile = await response.json();
+                return profile;
+            } catch (error) {
+                console.error("Error fetching profile details:", error);
+                alert("Failed to load profile details.");
+                return null;
+            }
+        }
+
+        // Attach click event to profile icon
+        document.querySelector('.profile').addEventListener('click', async() => {
+            const profileData = await getProfileDetails();
+            if (profileData) {
+                // Map response to the format expected by openUserModal
+                openUserModal({
+                    name: profileData.User,
+                    likedMovies: profileData.liked_movies,
+                    dislikedMovies: profileData.disliked_movies
+                });
+            }
+        });
+
+
+
+
+        function displaySearchResults(movies) {
+            const searchOverlay = document.getElementById("searchResultsOverlay");
+            const searchResultsList = document.getElementById("searchResultsList");
+
+            searchResultsList.innerHTML = ""; // Clear previous results
+
+            if (movies.length === 0) {
+                searchResultsList.innerHTML = "<p style='color: #ccc;'>No results found.</p>";
+            } else {
+                movies.forEach((movie) => {
+                    const card = document.createElement("div");
+                    card.className = "search-movie-card";
+                    card.innerHTML = `
+                    <img src="${movie.poster_path}" alt="${movie.title} Poster">
+                    <div class="movie-info">
+                        <h3>${movie.title}</h3>
+                        <p>${movie.genres}</p>
+                        <p>${movie.vote_average}/10</p>
+                        <div class="movie-actions">
+                            <button class="like-btn" data-id="${movie.movie_id}" aria-label="Like">Like</button>
+                            <button class="dislike-btn" data-id="${movie.movie_id}" aria-label="Dislike">Dislike</button>
+                        </div>
+                    </div>
+                    `;
+                    // Attach like/dislike event listeners
+                    const likeBtn = card.querySelector('.like-btn');
+                    const dislikeBtn = card.querySelector('.dislike-btn');
+
+                    likeBtn.addEventListener('click', function() {
+                        const movieId = this.getAttribute('data-id');
+                        setFeedback(movieId, 'like');
+                    });
+
+                    dislikeBtn.addEventListener('click', function() {
+                        const movieId = this.getAttribute('data-id');
+                        setFeedback(movieId, 'dislike');
+                    });
+                    searchResultsList.appendChild(card);
+                });
+            }
+
+            // Show the search overlay
+            searchOverlay.classList.add("active");
+        }
+
+        // Close search results and remove overlay
+        function closeSearchResults() {
+            document.getElementById("searchResultsOverlay").classList.remove("active");
+        }
+
+        // Handle search event on Enter key
+        document.querySelector(".search-bar input").addEventListener("keyup", async(event) => {
+            if (event.key === "Enter") {
+                const query = event.target.value.trim();
+                if (!query) return;
+
+                try {
+                    const response = await fetch("http://127.0.0.1:8000/search_movies", {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            query: query
+                        }),
+                    });
+
+                    const result = await response.json();
+                    if (result.status === "success") {
+                        displaySearchResults(result.results);
+                    } else {
+                        alert("No movies found.");
+                    }
+                } catch (error) {
+                    console.error("Search error:", error);
+                }
+            }
+        });
+
+
+
+
+
+        // Function to open the Add Movie modal
+        function openAddMovieModal() {
+            document.getElementById("addMovieModal").classList.remove("hidden");
+        }
+
+        // Function to close the Add Movie modal
+        function closeAddMovieModal() {
+            document.getElementById("addMovieModal").classList.add("hidden");
+        }
+
+        // Function to call the backend route with the provided movie ID
+        async function submitNewMovie() {
+            const movieId = document.getElementById("movieIdInput").value;
+            if (!movieId) {
+                alert("Please enter a movie ID.");
+                return;
+            }
+
+            try {
+                // Optionally, include an authorization token if your endpoint requires authentication
+                const response = await fetch(`http://127.0.0.1:8000/convert_movie_csv/${movieId}`, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}` // Use your existing token variable if required
+                    }
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    alert(result.message);
+                } else {
+                    alert("Error: " + result.detail);
+                }
+            } catch (error) {
+                console.error("Error calling Add Movie route:", error);
+                alert("Failed to add new movie. Please try again later.");
+            } finally {
+                closeAddMovieModal();
+            }
+        }
+    </script>
+</body>
+
+</html>

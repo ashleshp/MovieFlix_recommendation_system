@@ -1,0 +1,30 @@
+name: movie_recommendation
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.12.7
+  - pip
+  - implicit
+  - pandas
+  - numpy
+  - scipy
+  - pyzmq  
+  - fastapi
+  - uvicorn
+  - pydantic
+  - passlib
+  - pyqt
+  - pytorch
+  - pip:
+      - tmdbv3api
+      - python-jose==3.3.0
+      - requests
+      - faiss-cpu
+      - sentence-transformers
+      - transformers
+      - locust
+      - rapidfuzz
+      - concurrent-log-handler
+      - prometheus-client
