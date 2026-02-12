@@ -1,4 +1,5 @@
-﻿# Movie Recommendation Service README
+﻿
+[Watch demo video](demo.mp4)
 This README provides a step-by-step guide for installing and setting up the Movie Recommendation Service along with Prometheus and Grafana for monitoring the service's performance through a metric dashboard.
 **The Project report is in Assignment 6 folder**
 ## Prerequisites
@@ -101,4 +102,5 @@ Go to Dashboards:
 
 Your metric dashboard should now be loaded and displaying the service's metrics.
 ![Grafana Dashboard](images/grafana-dashboard.PNG)
+
 
