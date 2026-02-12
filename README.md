@@ -1,4 +1,4 @@
-# Movie Recommendation Service README
+﻿# Movie Recommendation Service README
 This README provides a step-by-step guide for installing and setting up the Movie Recommendation Service along with Prometheus and Grafana for monitoring the service's performance through a metric dashboard.
 **The Project report is in Assignment 6 folder**
 ## Prerequisites
@@ -31,14 +31,14 @@ python dashboard.py
 ### Step 4: Start all services
 
 Once startet a microservice dashboard will show up that looks like this:
-![Microservice Dashboard Stopped](Project/images/microservice_dashboard_stopped.PNG)
+![Microservice Dashboard Stopped](images/microservice_dashboard_stopped.PNG)
 
 Here you will need to start all services.
 This may take some time for all the services to fully start and load.
 
 Once loaded it should look like this:
 
-![Microservce Dasboard Running](Project/images/microservice_dashboard_running.PNG)
+![Microservce Dasboard Running](images/microservice_dashboard_running.PNG)
 
 ### Step 5: Open the Movie Recommendation Dashboard
 Once the service is running, open the `index.html` file located in the project folder to access the movie recommendation service in your browser.
@@ -100,4 +100,5 @@ Go to Dashboards:
 - Select Data sources as Prometheus
 
 Your metric dashboard should now be loaded and displaying the service's metrics.
-![Grafana Dashboard](Project/images/grafana-dashboard.PNG)
+![Grafana Dashboard](images/grafana-dashboard.PNG)
+
